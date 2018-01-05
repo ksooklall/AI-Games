@@ -1,0 +1,2 @@
+model_checkpoint_path: "E:\\GensisAI\\Sonic The Hedgehog\\sonic_run_0.001-alexnet-10-epochs.model"
+all_model_checkpoint_paths: "E:\\GensisAI\\Sonic The Hedgehog\\sonic_run_0.001-alexnet-10-epochs.model"
