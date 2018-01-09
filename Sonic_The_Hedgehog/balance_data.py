@@ -4,6 +4,7 @@ import cv2
 from glob import glob
 
 #data = np.concatenate([np.load('data/training_data_{}.npy'.format(i)) for i in range(2, 17) if i != 9])
+import pdb; pdb.set_trace()
 data = np.concatenate([np.load(i) for i in glob('data/*.npy')])    
     
 def show_data():
@@ -22,7 +23,7 @@ def down_sample(df):
     jj = df[df['J'] == 1]
     return pd.concat([n_df, jj, dd])
 
-#show_data()
+show_data()
 df = pd.DataFrame(data)
 bdf = pd.DataFrame(df[1].values.tolist(), columns=['A', 'D', 'J'])
 print(bdf.sum())

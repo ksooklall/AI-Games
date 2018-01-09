@@ -30,6 +30,7 @@ def alexnet(width, height, output, learning_rate):
     network = conv_2d(network, nb_filter=256, filter_size=3, strides=1, activation='relu')
     network = max_pool_2d(network, kernel_size=3, strides=2)
     network = local_response_normalization(network)
+    
     network = fully_connected(network, n_units=4096, activation='tanh')
     network = dropout(network, 0.5)
     network = fully_connected(network, n_units=4096, activation='tanh')

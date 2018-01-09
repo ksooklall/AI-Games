@@ -1,7 +1,9 @@
 import win32api as wapi
 import time
 
-keyList = [i for i in "\b" + "ABCDEFGHIJKLMNOPQRSTUVQXYZ 123456789,.'APS$/\\"]
+keyList = ["\b"]
+for char in "ABCDEFGHIJKLMNOPQRSTUVWXYZ 123456789,.'£$/\\":
+    keyList.append(char)
 
 def key_check():
     keys = []
