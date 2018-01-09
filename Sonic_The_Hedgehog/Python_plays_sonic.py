@@ -4,46 +4,41 @@ import time
 from get_keys import key_check
 from grab_screen import grab_screen
 import os
-from train_model import WIDTH, HEIGHT
+#from train_model import WIDTH, HEIGHT
+from helper import count_down
+from sklearn.preprocessing import LabelBinarizer
 
+# Image size
+WIDTH = 96
+HEIGHT = 76
+
+keys = ['A', 'S', 'D', 'J', ' ']
+one_hot = LabelBinarizer().fit_transform(keys)
+key_mapping = dict(zip(keys, one_hot))
 def keys_to_output(keys):
-    output = [0, 0, 0]
-    if 'A' in keys:     # Left
-        output[0] = 1
-    elif 'J' in keys:   # Jump
-        output[2] = 1
-    else:                # Right
-        output[1] = 1
-    return output
-
-def process_img(img):
-    # Use for edge detection
-    return cv2.Canny(img, threshold1=70, threshold2=140)
-
-def show_screen(screen):
-    cv2.imshow('window', screen)
-    if cv2.waitKey(25) & 0xFF ==ord('q'):
-        cv2.destroyAllWindows()
-        return True
-    return False
-
-def count_down(n):
-    for i in range(n)[::-1]:
-        print(i, end=' ')
-        time.sleep(1)
-
-file_name  = 'data/training_data_3.npy'
-if os.path.isfile(file_name):
-    print('Loading: {}'.format(file_name))
-    training_data = list(np.load(file_name))
-else:
-    print('Creating new file')
-    training_data = []
-batch = 9
+##    output = [0, 0, 0, 0]
+##    if 'A' in keys:     # Left
+##        output[0] = 1
+##    elif 'D' in keys:   # Right
+##        output[2] = 1
+##    elif 'S' in keys:   # Down
+##        output[1] = 1
+##    else:               # Jump
+##        output[3] = 1
+##    return output
+    return key_mapping.get(keys[-1] if keys else 'J', key_mapping['J'])
 
 if __name__ == '__main__':
-    count_down(10)
+    file_name  = 'data/training_data_1.npy'
+    if os.path.isfile(file_name):
+        print('Loading: {}'.format(file_name))
+        training_data = list(np.load(file_name))
+    else:
+        print('Creating new file')
+        training_data = []
+    batch = 1
 
+    count_down(9)
     ## To do: Determine how to choose what monitor is being detected
     while(True):
         #last = time.time()
@@ -54,16 +49,15 @@ if __name__ == '__main__':
         keys = key_check()
         output = keys_to_output(keys)
         training_data.append([screen, output])
-        #cv2.imshow('window', screen)
-        #if cv2.waitKey(25) & 0xFF ==ord('q'):
-        #    cv2.destroyAllWindows()
-        #    break
+##        cv2.imshow('window', screen)
+##        if cv2.waitKey(25) & 0xFF ==ord('q'):
+##            cv2.destroyAllWindows()
+##            break
         #print('FPS: {}'.format(time.time()-last))
 
-        if len(training_data) % 500 == 0:
-            print(len(training_data))
+        if not len(training_data) % 1000:
             np.save(file_name, training_data)
-            print('Saved file')
+            print('Saved file: {}'.format(batch))
             training_data = []
             batch += 1
-            file_name = 'training_data_{}'.format(batch)
+            file_name = 'training_data_{}'.format(batch)            
