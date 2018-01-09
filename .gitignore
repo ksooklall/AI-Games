@@ -101,11 +101,11 @@ ENV/
 .mypy_cache/
 
 # data
-data/
+Sonic_The_Hedgehog/data/
 
 # tf logs
-log/
+Sonic_The_Hedgehog/log/
 
 # trained models
-trained_models/
+Sonic_The_Hedgehog/trained_models/
 
