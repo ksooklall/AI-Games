@@ -3,13 +3,13 @@ import pandas as pd
 import cv2
 from glob import glob
 
-#data = np.concatenate([np.load('data/training_data_{}.npy'.format(i)) for i in range(2, 17) if i != 9])
-import pdb; pdb.set_trace()
-data = np.concatenate([np.load(i) for i in glob('data/*.npy')])    
+keys = ['A', 'S', 'D', 'J', ' ', 'DJ', 'AJ']
+data = np.concatenate([np.load(i) for i in glob('data/*.npy')])
     
 def show_data():
     for images in data:
         img = images[0]
+        img = cv2.resize(img, (960, 760))
         choice = images[1]
         cv2.imshow('test', cv2.cvtColor(img, cv2.COLOR_GRAY2RGB))
         print(choice)
@@ -23,11 +23,11 @@ def down_sample(df):
     jj = df[df['J'] == 1]
     return pd.concat([n_df, jj, dd])
 
-show_data()
+#show_data()
 df = pd.DataFrame(data)
-bdf = pd.DataFrame(df[1].values.tolist(), columns=['A', 'D', 'J'])
+bdf = pd.DataFrame(df[1].values.tolist(), columns=keys)
 print(bdf.sum())
-
+import pdb; pdb.set_trace()
 sampled_df = down_sample(bdf)
 sampled_df['frames'] = df[0].iloc[sampled_df.index]
 sampled_df['button'] = list(zip(sampled_df['A'], sampled_df['D'], sampled_df['J']))
