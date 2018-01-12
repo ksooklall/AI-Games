@@ -101,7 +101,8 @@ ENV/
 .mypy_cache/
 
 # data
-Sonic_The_Hedgehog/data/
+Sonic_The_Hedgehog/batch_data/
+Sonic_The_Hedgehog/training_data/
 
 # tf logs
 Sonic_The_Hedgehog/log/

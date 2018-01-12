@@ -6,7 +6,7 @@ from glob import glob
 from sklearn.preprocessing import LabelBinarizer
 
 from get_keys import key_check
-from grab_screen import grab_screen
+#from grab_screen import grab_screen
 from helper import count_down
 
 
@@ -17,6 +17,7 @@ HEIGHT = 76
 keys = ['A', 'S', 'D', 'J', ' ', 'DJ', 'AJ']
 one_hot = LabelBinarizer().fit_transform(keys)
 key_mapping = dict(zip(keys, one_hot))
+import pdb; pdb.set_trace()
 def keys_to_output(keys):
     if 'D' in keys and 'J' in keys:
         return key_mapping['DJ']

@@ -35,3 +35,6 @@ sampled_df['button'] = list(zip(sampled_df['A'], sampled_df['D'], sampled_df['J'
 training_data = np.array([sampled_df['frames'], sampled_df['button']]).T
 np.save('training_data_v1.npy', training_data)
 
+# Try normalizing
+data[:, 0] = data[:, 0] / 255
+

@@ -6,7 +6,7 @@ SendInput = ctypes.windll.user32.SendInput
 
 # directx scan codes http://www.gamespp.com/directx/directInputKeyboardScanCodes.html
 W = 0x11
-A = 0x1E        # A
+A = 0x1E
 S = 0x1F
 D = 0x20
 J = 0x24

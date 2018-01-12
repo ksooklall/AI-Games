@@ -7,11 +7,13 @@ HEIGHT = 76
 
 # Training parameters
 LR = 1e-3
-EPOCHS = 10
+EPOCHS = 12
 MODEL_NAME = 'sonic_run_-{}-{}-epochs.tfl'.format('alexnet', EPOCHS)
 
-model = alexnet(WIDTH, HEIGHT, 3, LR)
 train_data = np.load('training_data_v1.npy')
+outputs = 7
+
+model = alexnet(WIDTH, HEIGHT, outputs, LR)
 
 train = train_data[:-100]
 test = train_data[-100:]
@@ -30,5 +32,4 @@ def train():
 
     # tensorboard --logdir=foo:E:/GensisAI/Sonic The Hedgehog/log
     model.save('trained_models/{}'.format(MODEL_NAME))
-
 #train()
