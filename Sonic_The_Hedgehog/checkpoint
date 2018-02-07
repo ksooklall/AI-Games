@@ -1,2 +1,2 @@
-model_checkpoint_path: "E:\\GensisAI\\Sonic_The_Hedgehog\\model_alexnet-7680"
-all_model_checkpoint_paths: "E:\\GensisAI\\Sonic_The_Hedgehog\\model_alexnet-7680"
+model_checkpoint_path: "E:\\GensisAI\\Sonic_The_Hedgehog\\alexnet_2-28950"
+all_model_checkpoint_paths: "E:\\GensisAI\\Sonic_The_Hedgehog\\alexnet_2-28950"

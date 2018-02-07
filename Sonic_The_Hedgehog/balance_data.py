@@ -4,7 +4,7 @@ import cv2
 from glob import glob
 
 keys = ['A', 'S', 'D', 'J', ' ', 'DJ', 'AJ']
-data = np.concatenate([np.load(i) for i in glob('data/*.npy')])
+data = np.concatenate([np.load(i) for i in glob('batch_data/*.npy')])
     
 def show_data():
     for images in data:
@@ -27,14 +27,10 @@ def down_sample(df):
 df = pd.DataFrame(data)
 bdf = pd.DataFrame(df[1].values.tolist(), columns=keys)
 print(bdf.sum())
-import pdb; pdb.set_trace()
-sampled_df = down_sample(bdf)
-sampled_df['frames'] = df[0].iloc[sampled_df.index]
-sampled_df['button'] = list(zip(sampled_df['A'], sampled_df['D'], sampled_df['J']))
-
-training_data = np.array([sampled_df['frames'], sampled_df['button']]).T
-np.save('training_data_v1.npy', training_data)
 
 # Try normalizing
-data[:, 0] = data[:, 0] / 255
+df['frames'] = df[0].map(lambda x: x/255)
+df['buttons'] = df[1]
 
+training_data = np.array([df['frames'], df['buttons']]).T
+np.save('nor_train_data_v2.npy', training_data)
