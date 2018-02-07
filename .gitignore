@@ -114,3 +114,4 @@ Sonic_The_Hedgehog/trained_models/
 # Third party files
 object_detection/
 Sonic_The_Hedgehog/utils/
+Sonic_The_Hedgehog/ssd_mobilenet_v1_coco_2017_11_17/
